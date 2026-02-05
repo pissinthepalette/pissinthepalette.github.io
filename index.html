@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piss In The Palette</title>
+    
+    <!-- FAVICON COM O MESMO SVG DO CURSOR (Data URI) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20width%3D%2215%22%20height%3D%2226%22%20viewBox%3D%220%200%2015%2026%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M13.0488%2014.2432L8.92285%2014.1709L8.1709%2014.1572L8.44922%2014.8555L11.5488%2022.6426L8.08105%2024.0645L4.98438%2016.2871L4.70117%2015.5752L4.16406%2016.1211L1.25684%2019.0703L1.50684%202.4834L13.0488%2014.2432Z%22%20fill%3D%22black%22%20stroke%3D%22%23990E0E%22%2F%3E%3C%2Fsvg%3E" type="image/svg+xml">
+    <style>
+        
+        @font-face {
+            font-family: 'TituloFont';
+            src: url('797e433ab948586e-s.p.dbea232f.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'CorpoFont';
+            src: url('caa3a2e1cccd8315-s.p.853070df.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        
+        html, body {
+            cursor: url("data:image/svg+xml,%3Csvg%20width%3D%2215%22%20height%3D%2226%22%20viewBox%3D%220%200%2015%2026%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M13.0488%2014.2432L8.92285%2014.1709L8.1709%2014.1572L8.44922%2014.8555L11.5488%2022.6426L8.08105%2024.0645L4.98438%2016.2871L4.70117%2015.5752L4.16406%2016.1211L1.25684%2019.0703L1.50684%202.4834L13.0488%2014.2432Z%22%20fill%3D%22black%22%20stroke%3D%22%23990E0E%22%2F%3E%3C%2Fsvg%3E") 6 6, auto;
+        }
+        
+        
+        button, .btn, .btn-reset, .btn-apply, .btn-save,
+        .upload-area:not(.has-image), input[type="range"],
+        a, [onclick] {
+            cursor: inherit !important;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'CorpoFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        
+        h1, h2, h3, .gradient-title, .section-title {
+            font-family: 'TituloFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        h3 {
+            color: #9b1414;
+            margin-bottom: 10px;
+            font-size: 1.7rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+        
+        h2, .gradient-title, .section-title {
+            font-size: 1.3rem;
+            line-height: 1.3;
+        }
+        
+        .subtitle {
+            color: #444;
+            font-size: 1.1rem;
+            margin-top: 5px;
+            letter-spacing: 0.3px;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .gradient-preview {
+            background: #050505;
+            padding: 20px;
+            border: 1px solid #222;
+        }
+        
+        .gradient-title {
+            margin-bottom: 15px;
+            color: #9b1414;
+        }
+        
+        .gradient-bar {
+            height: 50px;
+            width: 100%;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, 
+                #010603 0%, 
+                #0f160e 9%, 
+                #2f2a23 17%, 
+                #4c342d 29%, 
+                #71362e 37%, 
+                #ac302a 52%, 
+                #f2362e 65%, 
+                #ff9a84 75%, 
+                #ff9a84 100%);
+            border: 2px solid #222;
+        }
+        
+        .gradient-controls {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #222;
+        }
+        
+        .vertical-sliders-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 120px;
+            margin-top: 10px;
+            padding: 0 5px;
+            touch-action: none;
+        }
+        
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 32px;
+            height: 100%;
+            position: relative;
+            touch-action: none;
+        }
+        
+        .slider-group label {
+            font-size: 0.7rem;
+            color: #666;
+            margin-bottom: 8px;
+            white-space: nowrap;
+        }
+        
+        .vertical-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100px;
+            height: 6px;
+            background: #222;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            margin: 40px 0;
+            position: relative;
+            top: 30px;
+            touch-action: none;
+        }
+        
+        .vertical-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: currentColor;
+            cursor: pointer;
+            border: 3px solid #121212;
+            transition: transform 0.2s;
+            touch-action: none;
+        }
+        
+        .vertical-slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: currentColor;
+            cursor: pointer;
+            border: 3px solid #121212;
+            transition: transform 0.2s;
+        }
+        
+        .vertical-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid #222;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .color-dot:hover {
+            transform: scale(1.2);
+        }
+        
+        .slider-value {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 2.8rem;
+            font-weight: 500;
+            min-height: 18px;
+        }
+        
+        .reset-palette-btn {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .btn-reset {
+            background-color: #2f2a23;
+            margin-top: 2.8rem;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-family: 'TituloFont', sans-serif;
+        }
+        
+        .btn-reset:hover:not(:disabled) {
+            background-color: #3a342c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-reset:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .btn-icon {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .btn-reset .btn-icon {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z'/%3E%3C/svg%3E");
+        }
+        
+        .image-section {
+            background: #0a0a0a;
+            padding: 20px;
+            border: 1px solid #222;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 300px;
+        }
+        
+        .section-title {
+            margin-bottom: 20px;
+            color: #ff9a84;
+        }
+        
+        .upload-area {
+            border: 3px dashed #222;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #050505;
+            min-height: 300px;
+        }
+        
+        .upload-area.has-image {
+            padding: 0;
+            border: none;
+            background: none;
+            cursor: default;
+            display: block;
+            margin-bottom: 0;
+            min-height: auto;
+        }
+        
+        .upload-area:hover:not(.has-image) {
+            border-color: #ff9a84;
+            background-color: rgba(255, 154, 132, 0.05);
+        }
+        
+        
+        .upload-icon {
+            width: 80px;
+            height: 80px;
+            background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2271%22%20height%3D%2271%22%20viewBox%3D%220%200%2071%2071%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Crect%20width%3D%2271%22%20height%3D%2271%22%20fill%3D%22url(%23pattern0_109_2264)%22%2F%3E%3Cdefs%3E%3Cpattern%20id%3D%22pattern0_109_2264%22%20patternContentUnits%3D%22objectBoundingBox%22%20width%3D%221%22%20height%3D%221%22%3E%3Cuse%20xlink%3Ahref%3D%22%23image0_109_2264%22%20transform%3D%22scale(0.00195312)%22%2F%3E%3C%2Fpattern%3E%3Cimage%20id%3D%22image0_109_2264%22%20width%3D%22512%22%20height%3D%22512%22%20preserveAspectRatio%3D%22none%22%20xlink%3Ahref%3D%22data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAKVUlEQVR4nO3dsW3cSgBFUfKDgDJmasTqyappi9oulDljxmjdgj9H0IC45%2BTcN4EFX0wy6%2Bv1WgCAlv9mHwAA%2BHkCAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAEDQ%2Bmtp%2B9z31%2BwzcF%2BP41hnnwHgCjcAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAEbcvNfe77a%2BT73%2Fv%2BfYehaOjf3%2BM41u87CsC%2FcwMAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAEDQ%2BmvyAT73feg99d%2F7PniCr6Gvn%2Bf70Pcfb3%2Fsh%2Fef5zn0%2FeM41qEfALLcAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAELSN%2FsDnvr9Gvv%2B974Mn%2BEq%2FJ2%2F%2F3vvL8j717%2B9xHOvQAYDbcgMAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAEDQ%2Bhh8T%2Fzj7e37TgP8qOd5zj4CZD2OY%2FQn1pGP3QAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABC0jf7Ax9vb95wE%2BHH%2BfmGex3GM%2FsRr5GM3AAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABG2zD7AsX0NfP8%2F3oe8%2F3v7Yt2%2Ffvn37P77%2FuQ99vjyOse%2FdAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAELTNPsDd33O2b9%2B%2Bffv2r3iey1RuAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACNpmH%2BD%2B7znbt2%2Ffvn37V4ztj3IDAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABA0Db7AHd%2Fz9m%2Bffv27du%2F4nkuU7kBAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgaJt9gPu%2F52zfvn379u1fMbY%2Fyg0AAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABB2%2BwD3P09Z%2Fv27du3b%2F%2BK57lM5QYAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAICgbfYB7v%2Bes3379u3bt3%2FF2P4oNwAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAARtsw9w9%2Fec7du3b9%2B%2B%2FSue5zKVGwAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIK22Qe4%2F3vO9u3bt2%2Ff%2FhVj%2B6PcAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAELTNPsDd33O2b9%2B%2Bffv2r3iey1RuAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACNpmH%2BD%2B7znbt2%2Ffvn37V4ztj3IDAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABA0Db7AHd%2Fz9m%2Bffv27du%2F4nkuU7kBAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgaJt9gPu%2F52zfvn379u1fMbY%2Fyg0AAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABB2%2BwD3P09Z%2Fv27du3b%2F%2BK57lM5QYAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAICgbfYB7v%2Bes3379u3bt3%2FF2P4oNwAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAARtsw9w9%2Fec7du3b9%2B%2B%2FSue5zKVGwAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIK22Qe4%2F3vO9u3bt2%2Ff%2FhVj%2B6PcAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAELTNPsDd33O2b9%2B%2Bffv2r3iey1RuAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACNpmH%2BD%2B7znbt2%2Ffvn37V4ztj3IDAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABA0PrY99fYTxzfdRYA4B89Bv%2F7dQMAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAEDQ%2Bmv8N17fcRAA4H9ZlwFuAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACFpfr9fsMwAAP8wNAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAS89ftXGIus1VmbAAAAAASUVORK5CYII%3D%22%2F%3E%3C%2Fdefs%3E%3C%2Fsvg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-bottom: 15px;
+        }
+        
+        
+        
+        .upload-area.has-image .upload-icon {
+            display: none;
+        }
+        
+        .upload-text {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .upload-area.has-image .upload-text {
+            display: none;
+        }
+        
+        .upload-area.has-image .formats-text {
+            display: none;
+        }
+        
+        .formats-text {
+            color: #444;
+            font-size: 0.9rem;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .image-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background-color: #050505;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            max-height: 70vh;
+        }
+        
+        .upload-area.has-image ~ .image-container {
+            display: flex;
+        }
+        
+        .preview-image {
+            max-width: 100%;
+            max-height: 70vh;
+            display: none;
+            object-fit: contain;
+            width: auto;
+            height: auto;
+        }
+        
+        .upload-area.has-image ~ .image-container .preview-image {
+            display: block;
+        }
+        
+        .image-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .upload-area.has-image ~ .image-controls {
+            display: flex;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-family: 'TituloFont', sans-serif;
+        }
+        
+        .btn-apply {
+            background-color: #9b1414;
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-apply:hover:not(:disabled) {
+            background-color: #9b1414;
+            transform: translateY(-2px);
+        }
+        
+        .btn-save {
+            background-color: #2f2a23;
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-save:hover:not(:disabled) {
+            background-color: #3a342c;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .btn-apply .btn-icon {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='13.5' cy='6.5' r='.5'/%3E%3Ccircle cx='17.5' cy='10.5' r='.5'/%3E%3Ccircle cx='8.5' cy='7.5' r='.5'/%3E%3Ccircle cx='6.5' cy='12.5' r='.5'/%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z'/%3E%3C/svg%3E");
+        }
+        
+        .btn-save .btn-icon {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z'/%3E%3C/svg%3E");
+        }
+        
+        .instructions {
+            background-color: #0A09FE;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #222;
+        }
+        
+        .instructions h3 {
+            color: #9b1414;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            color: #ccc;
+            line-height: 1.5;
+        }
+        
+        footer {
+			font-family: 'TituloFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            color: #444;
+            font-size: 0.9rem;
+        }
+        
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .loading p {
+            margin-top: 15px;
+            color: #ff9a84;
+            font-weight: bold;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 154, 132, 0.1);
+            border-radius: 50%;
+            border-top-color: #ff9a84;
+            border-right-color: #f2362e;
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(5, 5, 5, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+        }
+        
+        .loading-overlay .spinner {
+            width: 60px;
+            height: 60px;
+            border-width: 4px;
+        }
+        
+        .loading-overlay p {
+            color: #ff9a84;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .loading-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2, .gradient-title, .section-title {
+                font-size: 1.2rem;
+            }
+            
+            .gradient-bar {
+                height: 40px;
+            }
+            
+            .vertical-sliders-container {
+                height: 100px;
+            }
+            
+            .vertical-slider {
+                width: 80px;
+                top: 25px;
+            }
+            
+            .slider-group {
+                width: 28px;
+            }
+            
+            .preview-image {
+                max-height: 60vh;
+            }
+            
+            .reset-palette-btn {
+                margin-top: 35px;
+                padding-top: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gradient-bar {
+                height: 35px;
+                margin-bottom: 10px;
+            }
+            
+            .gradient-preview {
+                padding: 15px;
+            }
+            
+            .image-section {
+                padding: 15px;
+            }
+            
+            .vertical-sliders-container {
+                height: 90px;
+                padding: 0 2px;
+            }
+            
+            .vertical-slider {
+                width: 70px;
+                top: 20px;
+            }
+            
+            .slider-group {
+                width: 24px;
+            }
+            
+            .slider-group label {
+                font-size: 0.6rem;
+            }
+            
+            .slider-value {
+                font-size: 0.6rem;
+            }
+            
+            .preview-image {
+                max-height: 50vh;
+            }
+            
+            .image-controls {
+                flex-direction: column;
+            }
+            
+            .upload-area:not(.has-image) {
+                padding: 30px 15px;
+                min-height: 250px;
+            }
+            
+            .upload-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .reset-palette-btn {
+                margin-top: 30px;
+                padding-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h3>Piss In The Palette</h3>
+            <p class="subtitle">Aplique a paleta de cores de Piss In The Wind em imagens!</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="image-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon"></div>
+                    <p class="upload-text">Clique ou aperte para pôr uma imagem aqui</p>
+                    <p class="formats-text">Formatos suportados: JPG, PNG, GIF</p>
+                </div>
+                <input type="file" id="fileInput" class="file-input" accept="image/*">
+                
+                <div class="image-container">
+                    <div class="image-wrapper">
+                        <div class="loading" id="loadingOriginal">
+                            <div class="spinner"></div>
+                            <p>Carregando imagem...</p>
+                        </div>
+                        <div class="loading-overlay" id="loadingOverlay">
+                            <div class="loading-content">
+                                <div class="spinner"></div>
+                                <p>Aplicando degradê...</p>
+                            </div>
+                        </div>
+                        <img id="previewImage" class="preview-image" alt="Pré-visualização da imagem">
+                    </div>
+                </div>
+                
+                <div class="image-controls">
+                    <button id="applyBtn" class="btn btn-apply" disabled>
+                        <span class="btn-icon"></span> Aplicar paleta
+                    </button>
+                    <button id="saveBtn" class="btn btn-save" disabled>
+                        <span class="btn-icon"></span> Salvar
+                    </button>
+                </div>
+            </div>
+            
+            <div class="gradient-preview">
+                <h2 class="gradient-title">Paleta a ser aplicada</h2>
+                <div class="gradient-bar" id="gradientBar"></div>
+                
+                <div class="gradient-controls" id="gradientControls">
+                    <!-- Sliders verticais serão inseridos aqui pelo JavaScript -->
+                </div>
+                
+                <div class="reset-palette-btn">
+                </div>
+            </div>
+            
+            <button id="resetPaletteBtn" class="btn-reset">
+                <span class="btn-icon"></span> Redefinir Paleta
+            </button>
+            
+            <div class="instructions">
+                <h3>Como usar:</h3>
+                <ol>
+                    <li>Clique na área "Carregar Imagem" para selecionar uma imagem do seu dispositivo</li>
+                    <li>Aguarde até que a imagem seja carregada na pré-visualização</li>
+                    <li>Use os sliders para ajustar as posições das cores no mapa degradê</li>
+                    <li>Clique no botão "Redefinir Paleta" para voltar aos valores originais</li>
+                    <li>Clique no botão "Aplicar Paleta" para aplicar as cores especificadas</li>
+                    <li>Use o botão "Salvar" para baixar o resultado da alteração</li>
+                    <li>Você também pode arrastar e soltar uma imagem diretamente na área de upload</li>
+                </ol>
+            </div>
+        </div>
+        
+        <footer>
+            <p>PISS IN THE PALETTE · JOJI TOCANTINS</p>
+        </footer>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>!function(a){var b={total:10,ofTop:0,ofLeft:0,on:"document.body",twinkle:.2,minPixel:1,maxPixel:2,color:"#f2362e",namespace:"jqueryFireFly",zIndex:Math.ceil(20*Math.random())-1,borderRadius:"50%",_paused:!1};a.firefly=function(c){if(a.firefly.settings=a.extend({},b,c),a.firefly.eleHeight=a(a.firefly.settings.on).height(),a.firefly.eleWidth=a(a.firefly.settings.on).width(),a(window).resize(function(){if("document.body"!==a.firefly.settings.on){var b=a(a.firefly.settings.on).offset();a.firefly.offsetTop=b.top,a.firefly.offsetLeft=b.left,a.firefly.eleHeight=a(a.firefly.settings.on).height(),a.firefly.eleWidth=a(a.firefly.settings.on).width()}else a.firefly.offsetTop=0,a.firefly.offsetLeft=0,a.firefly.eleHeight=a(document.body).height(),a.firefly.eleWidth=a(document.body).width()}),"document.body"!==a.firefly.settings.on){var d=a(a.firefly.settings.on).offset();a.firefly.offsetTop=d.top,a.firefly.offsetLeft=d.left,a.firefly.eleHeight=a(a.firefly.settings.on).height(),a.firefly.eleWidth=a(a.firefly.settings.on).width()}else a.firefly.offsetTop=0,a.firefly.offsetLeft=0,a.firefly.eleHeight=a(document.body).height(),a.firefly.eleWidth=a(document.body).width();for(i=0;i<a.firefly.settings.total;i++){var e=a.firefly.randomPixel(a.firefly.settings.minPixel,a.firefly.settings.maxPixel),f=a.firefly.create(e);a.firefly.fly(f)}return a.firefly.sparks=a(a.firefly.settings.on).children("."+a.firefly.settings.namespace),this},a.firefly.pause=function(b){a.firefly.settings._paused=!0,b&&a.each(a.firefly.sparks,function(b,c){a(c).stop(!0)})},a.firefly.resume=function(){a.firefly.settings._paused=!1,a.each(a.firefly.sparks,function(b,c){a.firefly.fly(c)})},a.firefly.create=function(b){return spark=a("<div>").hide(),spark.addClass(a.firefly.settings.namespace),a.firefly.settings._onSparkID++,"document.body"===a.firefly.settings.on?a(document.body).append(spark):a(a.firefly.settings.on).append(spark),spark.css({position:"absolute",width:b,height:b,"background-color":a.firefly.settings.color,"z-index":a.firefly.settings.zIndex,"border-radius":a.firefly.settings.borderRadius,top:a.firefly.offsetTop+a.firefly.random(a.firefly.eleHeight-50),left:a.firefly.offsetLeft+a.firefly.random(a.firefly.eleWidth-50),"pointer-events":"none"}).show()},a.firefly.fly=function(b){a(b).animate({top:a.firefly.offsetTop+a.firefly.random(a.firefly.eleHeight-50),left:a.firefly.offsetLeft+a.firefly.random(a.firefly.eleWidth-50),opacity:a.firefly.opacity(a.firefly.settings.twinkle)},{duration:2e3*(a.firefly.random(10)+5),done:function(){a.firefly.settings._paused||a.firefly.fly(b)}})},a.firefly.randomPixel=function(a,b){return Math.floor(Math.random()*(b-a+1)+a)},a.firefly.random=function(a){return Math.ceil(Math.random()*a)-1},a.firefly.opacity=function(a){return op=Math.random(),op<a?0:1}}(jQuery);
+</script>
+	<script>
+	// If you don't want the particles, change the following to false
+const doParticles = true;
+
+
+
+
+// Do not mess with the rest of this file unless you know what you're doing
+
+const getWidth = () => { // credit to travis on stack overflow
+    return Math.max(
+        document.body.scrollWidth,
+        document.documentElement.scrollWidth,
+        document.body.offsetWidth,
+        document.documentElement.offsetWidth,
+        document.documentElement.clientWidth
+    );
+};
+
+if (doParticles) {
+    if (getWidth() < 400) $.firefly({
+        minPixel: 1,
+        maxPixel: 2,
+        total: 20
+    });
+    else $.firefly({
+        minPixel: 1,
+        maxPixel: 3,
+        total: 40
+    });
+}
+        const fileInput = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const previewImage = document.getElementById('previewImage');
+        const applyBtn = document.getElementById('applyBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const resetPaletteBtn = document.getElementById('resetPaletteBtn');
+        const loadingOriginal = document.getElementById('loadingOriginal');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const gradientBar = document.getElementById('gradientBar');
+        const gradientControls = document.getElementById('gradientControls');
+        
+        // Variáveis globais
+        let originalImage = null;
+        let processedImageUrl = null;
+        let isProcessed = false;
+        let canvas = null;
+        let isDraggingSlider = false;
+        
+        // Definição do gradiente padrão com as cores e posições especificadas
+        const defaultGradientStops = [
+            {color: '#010603', position: 0, label: 'C1'},
+            {color: '#0f160e', position: 9, label: 'C2'},
+            {color: '#2f2a23', position: 17, label: 'C3'},
+            {color: '#4c342d', position: 29, label: 'C4'},
+            {color: '#71362e', position: 37, label: 'C5'},
+            {color: '#ac302a', position: 52, label: 'C6'},
+            {color: '#f2362e', position: 65, label: 'C7'},
+            {color: '#ff9a84', position: 75, label: 'C8'},
+            {color: '#ff9a84', position: 100, label: 'C9'}
+        ];
+        
+        // Gradiente atual (inicialmente igual ao padrão)
+        let gradientStops = JSON.parse(JSON.stringify(defaultGradientStops));
+        
+        // Função para prevenir comportamentos padrão de toque
+        function preventTouchDefaults(e) {
+            if (isDraggingSlider) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }
+        
+        // Função para atualizar a exibição do gradiente
+        function updateGradientDisplay() {
+            const gradientString = gradientStops.map(stop => 
+                `${stop.color} ${stop.position}%`
+            ).join(', ');
+            
+            gradientBar.style.background = `linear-gradient(to right, ${gradientString})`;
+        }
+        
+        // Função para redefinir a paleta para os valores padrão
+        function resetPalette() {
+            gradientStops = JSON.parse(JSON.stringify(defaultGradientStops));
+            createGradientControls();
+            updateGradientDisplay();
+            
+            if (originalImage && isProcessed) {
+                applyGradient();
+            }
+        }
+        
+        // Função para criar controles deslizantes verticais
+        function createGradientControls() {
+            gradientControls.innerHTML = '';
+            const slidersContainer = document.createElement('div');
+            slidersContainer.className = 'vertical-sliders-container';
+            
+            for (let i = 1; i < gradientStops.length - 1; i++) {
+                const stop = gradientStops[i];
+                
+                const sliderGroup = document.createElement('div');
+                sliderGroup.className = 'slider-group';
+                sliderGroup.dataset.index = i;
+                
+                const label = document.createElement('label');
+                label.textContent = stop.label;
+                
+                const slider = document.createElement('input');
+                slider.type = 'range';
+                slider.className = 'vertical-slider';
+                slider.min = gradientStops[i-1].position + 1;
+                slider.max = gradientStops[i+1].position - 1;
+                slider.value = stop.position;
+                slider.step = 1;
+                slider.style.color = stop.color;
+                
+                slider.addEventListener('touchstart', function(e) {
+                    isDraggingSlider = true;
+                    this.classList.add('dragging');
+                });
+                
+                slider.addEventListener('touchend', function() {
+                    isDraggingSlider = false;
+                    this.classList.remove('dragging');
+                });
+                
+                slider.addEventListener('touchcancel', function() {
+                    isDraggingSlider = false;
+                    this.classList.remove('dragging');
+                });
+                
+                const colorDot = document.createElement('div');
+                colorDot.className = 'color-dot';
+                colorDot.style.backgroundColor = stop.color;
+                colorDot.title = `${stop.color} (${stop.position}%)`;
+                
+                const valueDisplay = document.createElement('div');
+                valueDisplay.className = 'slider-value';
+                valueDisplay.id = `sliderValue${i}`;
+                valueDisplay.textContent = `${stop.position}%`;
+                
+                const updateSlider = function() {
+                    const index = parseInt(this.parentElement.dataset.index);
+                    const value = parseInt(this.value);
+                    
+                    gradientStops[index].position = value;
+                    document.getElementById(`sliderValue${index}`).textContent = `${value}%`;
+                    colorDot.title = `${stop.color} (${value}%)`;
+                    
+                    if (index > 1) {
+                        const prevSlider = slidersContainer.querySelector(`.slider-group[data-index="${index-1}"] .vertical-slider`);
+                        if (prevSlider) {
+                            prevSlider.max = value - 1;
+                        }
+                    }
+                    
+                    if (index < gradientStops.length - 2) {
+                        const nextSlider = slidersContainer.querySelector(`.slider-group[data-index="${index+1}"] .vertical-slider`);
+                        if (nextSlider) {
+                            nextSlider.min = value + 1;
+                        }
+                    }
+                    
+                    updateGradientDisplay();
+                    
+                    if (originalImage && isProcessed) {
+                        applyGradient();
+                    }
+                };
+                
+                slider.addEventListener('input', updateSlider);
+                slider.addEventListener('change', updateSlider);
+                
+                sliderGroup.appendChild(label);
+                sliderGroup.appendChild(slider);
+                sliderGroup.appendChild(colorDot);
+                sliderGroup.appendChild(valueDisplay);
+                
+                slidersContainer.appendChild(sliderGroup);
+            }
+            
+            gradientControls.appendChild(slidersContainer);
+            document.addEventListener('touchmove', preventTouchDefaults, { passive: false });
+            document.addEventListener('scroll', preventTouchDefaults, { passive: false });
+        }
+        
+        // Event Listeners
+        uploadArea.addEventListener('click', () => {
+            if (!uploadArea.classList.contains('has-image')) {
+                fileInput.click();
+            }
+        });
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            if (!uploadArea.classList.contains('has-image')) {
+                uploadArea.style.borderColor = '#ff9a84';
+                uploadArea.style.backgroundColor = 'rgba(255, 154, 132, 0.05)';
+            }
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            if (!uploadArea.classList.contains('has-image')) {
+                uploadArea.style.borderColor = '#333';
+                uploadArea.style.backgroundColor = '#050505';
+            }
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#333';
+            uploadArea.style.backgroundColor = '#050505';
+            
+            if (e.dataTransfer.files.length && !uploadArea.classList.contains('has-image')) {
+                fileInput.files = e.dataTransfer.files;
+                handleImageUpload(e.dataTransfer.files[0]);
+            }
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length && !uploadArea.classList.contains('has-image')) {
+                handleImageUpload(e.target.files[0]);
+            }
+        });
+        
+        applyBtn.addEventListener('click', applyGradient);
+        saveBtn.addEventListener('click', saveImage);
+        resetPaletteBtn.addEventListener('click', resetPalette);
+        
+        // Função para lidar com o upload da imagem
+        function handleImageUpload(file) {
+            if (!file.type.match('image.*')) {
+                alert('Por favor, selecione um arquivo de imagem.');
+                return;
+            }
+            
+            uploadArea.classList.add('has-image');
+            loadingOriginal.style.display = 'block';
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                originalImage = new Image();
+                originalImage.onload = function() {
+                    if (!canvas) {
+                        canvas = document.createElement('canvas');
+                    }
+                    
+                    previewImage.src = e.target.result;
+                    
+                    const maxHeight = window.innerHeight * 0.7;
+                    
+                    if (originalImage.height > maxHeight) {
+                        previewImage.style.maxHeight = `${maxHeight}px`;
+                        previewImage.style.width = 'auto';
+                    } else {
+                        previewImage.style.maxHeight = 'none';
+                        previewImage.style.height = 'auto';
+                        previewImage.style.width = 'auto';
+                    }
+                    
+                    loadingOriginal.style.display = 'none';
+                    applyBtn.disabled = false;
+                    saveBtn.disabled = true;
+                    isProcessed = false;
+                };
+                originalImage.src = e.target.result;
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        // Função para aplicar o gradiente na imagem
+        function applyGradient() {
+            if (!originalImage) return;
+            
+            loadingOverlay.style.display = 'flex';
+            applyBtn.disabled = true;
+            saveBtn.disabled = true;
+            resetPaletteBtn.disabled = true;
+            
+            setTimeout(() => {
+                canvas.width = originalImage.width;
+                canvas.height = originalImage.height;
+                
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(originalImage, 0, 0);
+                
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+                    
+                    const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+                    const percent = (luminance / 255) * 100;
+                    
+                    let startColor = gradientStops[0];
+                    let endColor = gradientStops[gradientStops.length - 1];
+                    
+                    for (let j = 0; j < gradientStops.length - 1; j++) {
+                        if (percent >= gradientStops[j].position && percent <= gradientStops[j + 1].position) {
+                            startColor = gradientStops[j];
+                            endColor = gradientStops[j + 1];
+                            break;
+                        }
+                    }
+                    
+                    const range = endColor.position - startColor.position;
+                    const factor = range > 0 ? (percent - startColor.position) / range : 0;
+                    
+                    const color = interpolateColor(startColor.color, endColor.color, factor);
+                    
+                    const rgb = hexToRgb(color);
+                    data[i] = rgb.r;
+                    data[i + 1] = rgb.g;
+                    data[i + 2] = rgb.b;
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+                processedImageUrl = canvas.toDataURL('image/png');
+                previewImage.src = processedImageUrl;
+                
+                loadingOverlay.style.display = 'none';
+                saveBtn.disabled = false;
+                applyBtn.disabled = false;
+                resetPaletteBtn.disabled = false;
+                isProcessed = true;
+            }, 50);
+        }
+        
+        function interpolateColor(color1, color2, factor) {
+            const rgb1 = hexToRgb(color1);
+            const rgb2 = hexToRgb(color2);
+            
+            const r = Math.round(rgb1.r + factor * (rgb2.r - rgb1.r));
+            const g = Math.round(rgb1.g + factor * (rgb2.g - rgb1.g));
+            const b = Math.round(rgb1.b + factor * (rgb2.b - rgb1.b));
+            
+            return rgbToHex(r, g, b);
+        }
+        
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : {r: 0, g: 0, b: 0};
+        }
+        
+        function rgbToHex(r, g, b) {
+            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        }
+        
+        function saveImage() {
+            if (!processedImageUrl) return;
+            
+            const link = document.createElement('a');
+            link.download = 'pitw.png';
+            link.href = processedImageUrl;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        updateGradientDisplay();
+        createGradientControls();
+        
+        window.addEventListener('resize', function() {
+            if (originalImage) {
+                const maxHeight = window.innerHeight * 0.7;
+                if (originalImage.height > maxHeight) {
+                    previewImage.style.maxHeight = `${maxHeight}px`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
